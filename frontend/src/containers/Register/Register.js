@@ -85,11 +85,11 @@ class Register extends Component {
                     <FormElement
                         propertyName="avatarImage"
                         title="Avatar image"
-                        type="text"
+                        type="file"
                         value={this.state.avatarImage}
                         onChange={this.inputChangeHandler}
                         error={this.getFieldHasError('avatarImage')}
-                        placeholder="avatar image link"
+                        placeholder="Avatar image"
                     />
 
                     <FormGroup row>
