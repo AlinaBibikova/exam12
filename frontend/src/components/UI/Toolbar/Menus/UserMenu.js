@@ -7,7 +7,7 @@ const UserMenu = ({user, logout}) => {
     return (
         <Nav>
             <NavItem>
-                <AvatarThumbnail user={user} avatar={user.avatarImage}/>
+                <AvatarThumbnail user={user} avatarImage={user.avatarImage}/>
             </NavItem>
             <NavItem>
                 <span className="nav-link">Hello, {user.displayName}</span>

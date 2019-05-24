@@ -16,15 +16,28 @@ class Register extends Component {
         avatarImage: ''
     };
 
+
     inputChangeHandler = event => {
         this.setState({
-            [event.target.name]: event.target.value
-        });
+            [event.target.name]: event.target.value});
     };
 
-    submitFormHandler = event => {
+    submitFromHandler = event => {
         event.preventDefault();
-        this.props.registerUser({...this.state});
+
+        const formData = new FormData();
+
+        Object.keys(this.state).forEach(key => {
+            formData.append(key, this.state[key]);
+        });
+
+        this.props.registerUser(formData)
+    };
+
+    fileChangeHandler = event => {
+        this.setState({
+            [event.target.name]: event.target.files[0]
+        })
     };
 
     getFieldHasError = fieldName => {
@@ -45,7 +58,7 @@ class Register extends Component {
                         {this.props.error.global}
                     </Alert>
                 )}
-                <Form onSubmit={this.submitFormHandler}>
+                <Form onSubmit={this.submitFromHandler}>
                     <FormGroup>
                         <FacebookLogin/>
                     </FormGroup>
@@ -86,8 +99,7 @@ class Register extends Component {
                         propertyName="avatarImage"
                         title="Avatar image"
                         type="file"
-                        value={this.state.avatarImage}
-                        onChange={this.inputChangeHandler}
+                        onChange={this.fileChangeHandler}
                         error={this.getFieldHasError('avatarImage')}
                         placeholder="Avatar image"
                     />
