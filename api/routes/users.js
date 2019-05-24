@@ -1,28 +1,38 @@
 const express = require('express');
 const axios = require('axios');
 const nanoid = require('nanoid');
+const multer = require('multer');
+const path = require('path');
 
 const config = require('../config');
 const User = require('../models/User');
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, config.uploadPath);
+    },
+    filename: (req, file, cb) => {
+        cb(null, nanoid() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({storage});
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-    try {
-        const user = new User({
-            username: req.body.username,
-            displayName: req.body.displayName,
-            password: req.body.password,
-            avatarImage: req.body.avatarImage
-        });
+router.post('/', upload.single('avatarImage'), (req, res) => {
+    const userData = req.body;
 
-        user.generateToken();
-        await user.save();
-
-        return res.send({message: 'User registered!', user});
-    } catch (e) {
-        return res.status(400).send(e);
+    if (req.file) {
+        userData.avatarImage = req.file.filename;
     }
+
+    const user = new User(req.body);
+
+    user.generateToken();
+
+    user.save()
+        .then(user => res.send({message: 'User registered!', user}))
+        .catch(error => res.status(400).send(error))
 });
 
 router.post('/sessions', async (req, res) => {
@@ -39,18 +49,15 @@ router.post('/sessions', async (req, res) => {
 });
 
 router.delete('/sessions', async (req, res) => {
-    const success = {message: 'Logged out!'};
+    const token = req.get("Authorization");
+    if(!token) return res.send({message: "OK"});
 
-    const token = req.get('Authorization');
-    if (!token) return res.send(success);
+    const user = await User.findOne({token: token});
+    if(!user) return res.send({message: 'OK'});
 
-    const user = await User.findOne({token});
-    if (!user) return res.send(success);
-
-    user.generateToken();
     await user.save();
 
-    return res.send(success);
+    return res.send({message: 'OK'});
 });
 
 router.post('/facebookLogin', async (req, res) => {
@@ -60,6 +67,7 @@ router.post('/facebookLogin', async (req, res) => {
 
     try {
         const response = await axios.get(debugTokenUrl);
+
         const responseData = response.data;
 
         if (responseData.data.error) {
@@ -74,9 +82,9 @@ router.post('/facebookLogin', async (req, res) => {
 
         if (!user) {
             user = new User({
-                username: req.body.email || req.body.id,
-                displayName: req.body.name,
-                avatarImage: req.body.picture.data.url,
+                username: (req.body.email ||req.body.name) || req.body.id,
+                displayName: req.body.name || 'Anonymous',
+                avatar: req.body.picture.data.url,
                 password: nanoid(),
                 facebookId: req.body.id
             });
