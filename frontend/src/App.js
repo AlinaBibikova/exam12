@@ -1,25 +1,46 @@
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import './App.css';
+import {NotificationContainer} from "react-notifications";
+//import  from "./containers//";
+import {logoutUser} from "./store/actions/usersActions";
+import {connect} from "react-redux";
+import {Route, Switch, withRouter} from "react-router";
+import {Col, Container, Row} from "reactstrap";
+import Toolbar from "./components/UI/Toolbar/Toolbar";
+import Login from "./containers/Login/Login";
+//import New from "./containers/New/New";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    render() {
+        return (
+            <Fragment>
+                <NotificationContainer/>
+                <header>
+                    <Toolbar user={this.props.user}
+                             logout={this.props.logoutUser}/>
+                </header>
+                <Container className="py-5">
+                    <Row>
+                        <Col xs="12" md="12">
+                            <Switch>
+                                {/*<Route path="/" exact component={}/>*/}
+                                <Route path="/login" component={Login}/>
+                                {/*<Route path="//new" exact component={New}/>*/}
+                            </Switch>
+                        </Col>
+                    </Row>
+                </Container>
+            </Fragment>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    user: state.users.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+    logoutUser: () => dispatch(logoutUser()),
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
