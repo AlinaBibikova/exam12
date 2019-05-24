@@ -59,11 +59,12 @@ export const logoutUser = () => {
     return async dispatch => {
 
         try {
-            await axios.delete('/users/sessions');
+            const response = await axios.delete('/users/sessions');
             dispatch(logoutUserSuccess());
-            dispatch(push('/login'));
+            NotificationManager.success(response.data.message);
+            dispatch(push('/'));
         } catch {
-            alert('Could not logout!');
+            NotificationManager.error('Could not logout!');
         }
     }
 };
