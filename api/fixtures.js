@@ -16,7 +16,7 @@ const run = async () => {
     }
 
     await User.create({
-            avatar: 'avatar.png',
+            avatarImage: 'avatar.png',
             username: 'user',
             password: '123',
             displayName: 'Don Joe',
@@ -25,7 +25,7 @@ const run = async () => {
 
         },
         {
-            avatar: 'avatar.png',
+            avatarImage: 'avatar.png',
             username: 'admin',
             password: '123',
             displayName: 'Jack Dan',
