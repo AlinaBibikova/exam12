@@ -71,11 +71,8 @@ router.post('/facebookLogin', async (req, res) => {
         }
 
         let user = await User.findOne({facebookId: req.body.id});
-        console.log('1', user);
 
         if (!user) {
-            console.log('2', req.body.picture.data.url);
-
             user = new User({
                 username: req.body.email || req.body.id,
                 displayName: req.body.name,
