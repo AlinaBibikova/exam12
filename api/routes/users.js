@@ -57,7 +57,7 @@ router.delete('/sessions', async (req, res) => {
 
     await user.save();
 
-    return res.send({message: 'OK'});
+    return res.send({message: 'Logged out'});
 });
 
 router.post('/facebookLogin', async (req, res) => {
@@ -84,7 +84,7 @@ router.post('/facebookLogin', async (req, res) => {
             user = new User({
                 username: (req.body.email ||req.body.name) || req.body.id,
                 displayName: req.body.name || 'Anonymous',
-                avatar: req.body.picture.data.url,
+                avatarImage: req.body.picture.data.url,
                 password: nanoid(),
                 facebookId: req.body.id
             });
