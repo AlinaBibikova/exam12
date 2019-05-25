@@ -40,9 +40,21 @@ const run = async () => {
         },
 
         {
+            user: user._id,
+            title: 'Mohito',
+            image: 'mohito.jpg',
+        },
+
+        {
             user: test._id,
             title: 'Mohito',
             image: 'mohito.jpg',
+        },
+
+        {
+            user: test._id,
+            title: 'Pina colada',
+            image: 'colada.jpg',
         },
     );
 
