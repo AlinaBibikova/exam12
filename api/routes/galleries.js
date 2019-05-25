@@ -1,18 +1,31 @@
 const express = require('express');
+const multer = require('multer');
+const nanoid = require('nanoid');
+const path = require('path');
+const config = require('../config');
 
 const auth = require('../middleware/auth');
 const Gallery = require('../models/Gallery');
 
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, config.uploadPath);
+    },
+    filename: (req, file, cb) => {
+        cb(null, nanoid() + path.extname(file.originalname))
+    }
+});
+
+const upload = multer({storage});
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-
     try {
-        const Gallery = await Gallery
-            .select(['title', 'image', 'user']);
-        return res.send(Gallery);
-    } catch (e) {
-        return res.status(400).send(e);
+        const galleries = await Gallery.find();
+        return res.send(galleries);
+    } catch {
+        return res.sendStatus(500);
     }
 });
 
@@ -64,4 +77,6 @@ router.delete('/:id', auth, async (req, res) => {
         return res.status(400).send(error);
     }
 });
+
+module.exports = router;
 
