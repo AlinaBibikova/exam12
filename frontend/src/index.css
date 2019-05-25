@@ -1,21 +1,7 @@
-body {
-  background: #ecf0f5;
-}
+
 ul {
   list-style-type: none;
   padding: 0;
-}
-
-.box {
-  border-radius: 2px;
-  overflow: hidden;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  background: #fff;
-}
-
-.user-form {
-  max-width: 360px;
-  margin: 0 auto;
 }
 
 .item-img {

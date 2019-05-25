@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Card, CardBody, CardFooter, CardImg, CardText, CardTitle, Col} from "reactstrap";
+import {NavLink as RouterNavLink} from "react-router-dom";
 
 import {apiURL} from "../../constants";
 
@@ -17,12 +18,15 @@ const GalleriesList = props => {
                     : null
                 }
 
-                {props.title && userDisplayName?
+                {props.title && userDisplayName ?
                     <CardBody>
                         <CardTitle>
                             {props.title}
                         </CardTitle>
-                        <CardText>
+                        <CardText
+                            tag={RouterNavLink}
+                            to={`/galleries/${props.id}`}
+                        >
                             By: {userDisplayName}
                         </CardText>
                 </CardBody>

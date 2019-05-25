@@ -10,6 +10,7 @@ import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
 import Galleries from "./containers/Galleries/Galleries";
 import NewPhoto from "./containers/NewPhoto/NewPhoto";
+import Gallery from "./containers/Gallery/Gallery";
 
 class App extends Component {
     render() {
@@ -28,6 +29,7 @@ class App extends Component {
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" exact component={Register} />
                                 <Route path="/photo/new" exact component={NewPhoto}/>
+                                <Route path="/galleries/:id" exact component={Gallery}/>
                             </Switch>
                         </Col>
                     </Row>
