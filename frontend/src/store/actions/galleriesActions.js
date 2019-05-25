@@ -11,7 +11,6 @@ import {
     DELETE_DATA_SUCCESS,
     FETCH_DATA_FAILURE,
     FETCH_DATA_REQUEST,
-    FETCH_GALLERY_SUCCESS,
     FETCH_GALLERIES_SUCCESS
 } from "./actionTypes";
 
@@ -27,7 +26,6 @@ const deleteDataFailure = error => ({type: DELETE_DATA_FAILURE, error});
 const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 
 const fetchCocktailsSuccess = galleries => ({type: FETCH_GALLERIES_SUCCESS, galleries});
-const fetchCocktailSuccess = photo => ({type: FETCH_GALLERY_SUCCESS, photo});
 
 export const fetchGalleries = () => {
     return async dispatch => {
@@ -37,20 +35,6 @@ export const fetchGalleries = () => {
             const response = await axios.get('/galleries');
             dispatch(fetchCocktailsSuccess(response.data));
         } catch (e) {
-            dispatch(fetchDataFailure(e));
-        }
-    }
-};
-
-export const fetchPhoto = photoId => {
-    return async dispatch => {
-        dispatch(fetchDataRequest());
-
-        try {
-            const response = await axios.get(`/galleries/${photoId}`);
-            dispatch(fetchCocktailSuccess(response.data));
-        } catch (e) {
-            NotificationManager.error(e.response.data.message);
             dispatch(fetchDataFailure(e));
         }
     }

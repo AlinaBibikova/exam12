@@ -1,6 +1,5 @@
 import React from 'react';
 import {Button, Card, CardBody, CardFooter, CardImg, CardText, CardTitle, Col} from "reactstrap";
-import {NavLink as RouterNavLink} from "react-router-dom";
 
 import {apiURL} from "../../constants";
 
@@ -10,20 +9,17 @@ const GalleriesList = props => {
 
     return (
         <Col xs="12" sm="6" md="4">
-            <Card className="mb-3">
+            <Card className="mb-3" onClick={props.toogle}>
                 {props.image
-                    ? <RouterNavLink to={`/galleries/${props.id}`} className="card-img-wrap">
+                    ?
                         <CardImg src={`${apiURL}/uploads/${props.image}`} alt={props.title}/>
-                    </RouterNavLink>
+
                     : null
                 }
 
                 {props.title && userDisplayName?
                     <CardBody>
-                        <CardTitle
-                            tag={RouterNavLink}
-                            to={`/galleries/${props.id}`}
-                        >
+                        <CardTitle>
                             {props.title}
                         </CardTitle>
                         <CardText>
