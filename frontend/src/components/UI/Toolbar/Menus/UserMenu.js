@@ -13,7 +13,7 @@ const UserMenu = ({user, logout}) => {
                 <span className="nav-link">Hello, {user.displayName}</span>
             </NavItem>
             <NavItem>
-                <NavLink tag={RouterNavLink} to="//new">Add new</NavLink>
+                <NavLink tag={RouterNavLink} to="/photo/new">Add new photo</NavLink>
             </NavItem>
             <NavItem>
                 <span className="nav-link" onClick={logout}>Logout</span>

@@ -25,7 +25,7 @@ class App extends Component {
                                 {/*<Route path="/" exact component={}/>*/}
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" exact component={Register} />
-                                {/*<Route path="//new" exact component={New}/>*/}
+                                {/*<Route path="/photo/new" exact component={New}/>*/}
                             </Switch>
                         </Col>
                     </Row>
