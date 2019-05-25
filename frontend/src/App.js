@@ -8,6 +8,7 @@ import {Col, Container, Row} from "reactstrap";
 import Toolbar from "./components/UI/Toolbar/Toolbar";
 import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
+import Galleries from "./containers/Galleries/Galleries";
 
 class App extends Component {
     render() {
@@ -22,7 +23,7 @@ class App extends Component {
                     <Row>
                         <Col xs="12" md="12">
                             <Switch>
-                                {/*<Route path="/" exact component={}/>*/}
+                                <Route path="/" exact component={Galleries}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" exact component={Register} />
                                 {/*<Route path="/photo/new" exact component={New}/>*/}

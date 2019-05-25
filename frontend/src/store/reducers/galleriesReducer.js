@@ -24,7 +24,7 @@ const galleriesReducer = (state = initialState, action) => {
             return {...state, loading: false, error: action.error};
 
         case FETCH_GALLERIES_SUCCESS:
-            return {...state, loading: false, galleries: action.photos};
+            return {...state, loading: false, galleries: action.galleries};
 
         case FETCH_GALLERY_SUCCESS:
             return {...state, loading: false, photo: action.photo};

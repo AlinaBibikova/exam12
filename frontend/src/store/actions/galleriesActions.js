@@ -26,7 +26,7 @@ const deleteDataRequest = () => ({type: DELETE_DATA_REQUEST});
 const deleteDataFailure = error => ({type: DELETE_DATA_FAILURE, error});
 const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 
-const fetchCocktailsSuccess = photos => ({type: FETCH_GALLERIES_SUCCESS, photos});
+const fetchCocktailsSuccess = galleries => ({type: FETCH_GALLERIES_SUCCESS, galleries});
 const fetchCocktailSuccess = photo => ({type: FETCH_GALLERY_SUCCESS, photo});
 
 export const fetchGalleries = () => {
