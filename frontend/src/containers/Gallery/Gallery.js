@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {deletePhoto, fetchGalleries, fetchPhoto} from "../../store/actions/galleriesActions";
 import Loader from "../../components/UI/Loader/Loader";
 import {apiURL} from "../../constants";
-import {Button, Card, CardFooter} from "reactstrap";
+import {Card} from "reactstrap";
 
 class Gallery extends Component {
     async componentDidMount()  {
@@ -12,11 +12,9 @@ class Gallery extends Component {
     }
 
     render() {
-
         const photo = this.props.photo;
         const userId = this.props.user && this.props.user._id && this.props.user.displayName;
 
-        console.log(photo);
         return (
 
             <div>
@@ -35,13 +33,6 @@ class Gallery extends Component {
                     {photo.image && (
                         <img src={`${apiURL}/uploads/${photo.image}`} className="item-img" alt={photo.title}/>
                     )}
-
-                    {userId
-                        ? <CardFooter className="d-flex justify-content-between">
-                            <Button size="sm" color="danger" onClick={() => this.deletePhoto(this.props.match.params.id)}>Delete</Button>
-                        </CardFooter>
-                        : null
-                    }
                 </Card>
             </div>
         );
