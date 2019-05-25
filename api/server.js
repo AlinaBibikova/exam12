@@ -4,6 +4,7 @@ const config = require('./config');
 const cors = require('cors');
 
 const users = require('./routes/users');
+const gallery = require('./routes/gallery');
 
 const app = express();
 
@@ -15,6 +16,7 @@ const port = 8000;
 
 mongoose.connect(config.dbUrl, config.mongoOptions).then( () => {
     app.use('/users', users);
+    app.use('/gallery', gallery);
 });
 
 app.listen(port, () => {
