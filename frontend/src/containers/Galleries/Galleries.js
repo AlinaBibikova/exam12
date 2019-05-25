@@ -36,7 +36,7 @@ class Galleries extends Component {
                 <div>
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>{this.state.image.title}</ModalHeader>
-                        <img src={`${apiURL}/uploads/${this.state.image.image}`} className="Gallery"/>
+                        <img alt='' src={`${apiURL}/uploads/${this.state.image.image}`} className="Gallery"/>
                         <ModalFooter>
                             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
