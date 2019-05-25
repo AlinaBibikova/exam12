@@ -28,21 +28,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    try {
-        const gallery = await Gallery.findById(req.params.id);
-
-        if (gallery) {
-            return res.send(gallery);
-        } else {
-            return res.status(404).send({message: 'Gallery not found!'});
-        }
-
-    } catch {
-        return res.status(404).send({message: 'Gallery not found!'});
-    }
-});
-
 router.post('/', auth, upload.single('image'), async (req, res) => {
     const galleryData = req.body;
     galleryData.user = req.user._id;
