@@ -15,7 +15,7 @@ const GalleriesList = props => {
                     : null
                 }
 
-                {props.title && props.user ?
+                {props.title && props.userD ?
                     <CardBody>
                         <CardTitle
                             tag={RouterNavLink}
@@ -24,7 +24,7 @@ const GalleriesList = props => {
                             {props.title}
                         </CardTitle>
                         <CardText>
-                            {props.user.displayName}
+                            By: {props.userD.displayName}
                         </CardText>
                 </CardBody>
                     : null }

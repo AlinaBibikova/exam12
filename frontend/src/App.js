@@ -9,6 +9,7 @@ import Toolbar from "./components/UI/Toolbar/Toolbar";
 import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
 import Galleries from "./containers/Galleries/Galleries";
+import NewPhoto from "./containers/NewPhoto/NewPhoto";
 
 class App extends Component {
     render() {
@@ -26,7 +27,7 @@ class App extends Component {
                                 <Route path="/" exact component={Galleries}/>
                                 <Route path="/login" component={Login}/>
                                 <Route path="/register" exact component={Register} />
-                                {/*<Route path="/photo/new" exact component={New}/>*/}
+                                <Route path="/photo/new" exact component={NewPhoto}/>
                             </Switch>
                         </Col>
                     </Row>
