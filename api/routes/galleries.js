@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const gallery = await Gallery.findById(req.params.id);
+        const gallery = await Gallery.findById(req.params.id).populate('user');
 
         if (gallery) {
             return res.send(gallery);
