@@ -12,7 +12,7 @@ import {
     FETCH_DATA_FAILURE,
     FETCH_DATA_REQUEST,
     FETCH_GALLERY_SUCCESS,
-    FETCH_GALLERYS_SUCCESS
+    FETCH_GALLERIES_SUCCESS
 } from "./actionTypes";
 
 const fetchDataRequest = () => ({type: FETCH_DATA_REQUEST});
@@ -26,15 +26,15 @@ const deleteDataRequest = () => ({type: DELETE_DATA_REQUEST});
 const deleteDataFailure = error => ({type: DELETE_DATA_FAILURE, error});
 const deleteDataSuccess = () => ({type: DELETE_DATA_SUCCESS});
 
-const fetchCocktailsSuccess = photos => ({type: FETCH_GALLERYS_SUCCESS, photos});
+const fetchCocktailsSuccess = photos => ({type: FETCH_GALLERIES_SUCCESS, photos});
 const fetchCocktailSuccess = photo => ({type: FETCH_GALLERY_SUCCESS, photo});
 
-export const fetchGallery = () => {
+export const fetchGalleries = () => {
     return async dispatch => {
         dispatch(fetchDataRequest());
 
         try {
-            const response = await axios.get('/gallery');
+            const response = await axios.get('/galleries');
             dispatch(fetchCocktailsSuccess(response.data));
         } catch (e) {
             dispatch(fetchDataFailure(e));
@@ -47,7 +47,7 @@ export const fetchPhoto = photoId => {
         dispatch(fetchDataRequest());
 
         try {
-            const response = await axios.get(`/gallery/${photoId}`);
+            const response = await axios.get(`/galleries/${photoId}`);
             dispatch(fetchCocktailSuccess(response.data));
         } catch (e) {
             NotificationManager.error(e.response.data.message);
@@ -61,7 +61,7 @@ export const addPhoto = photoData => {
         dispatch(addDataRequest());
 
         try {
-            const response = await axios.post('/gallery', photoData);
+            const response = await axios.post('/galleries', photoData);
 
             dispatch(addDataSuccess());
             NotificationManager.success(response.data.message);
@@ -77,10 +77,10 @@ export const deletePhoto = photoId => {
         dispatch(deleteDataRequest());
 
         try {
-            const response = await axios.delete(`/gallery/${photoId}`);
+            const response = await axios.delete(`/galleries/${photoId}`);
 
             dispatch(deleteDataSuccess());
-            dispatch(fetchGallery());
+            dispatch(fetchGalleries());
             NotificationManager.success(response.data.message);
             dispatch(push('/'));
         } catch (e) {
