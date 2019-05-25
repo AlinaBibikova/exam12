@@ -1,7 +1,8 @@
 import React from 'react';
-import {apiURL} from "../../constants";
-import {Button, Card, CardBody, CardFooter, CardImg, CardTitle, Col} from "reactstrap";
+import {Button, Card, CardBody, CardFooter, CardImg, CardText, CardTitle, Col} from "reactstrap";
 import {NavLink as RouterNavLink} from "react-router-dom";
+
+import {apiURL} from "../../constants";
 
 const GalleriesList = props => {
     return (
@@ -14,15 +15,20 @@ const GalleriesList = props => {
                     : null
                 }
 
-                <CardBody>
-                    <CardTitle
-                        tag={RouterNavLink}
-                        to={`/galleries/${props.id}`}
-                    >
-                        {props.title}
-                    </CardTitle>
+                {props.title && props.user ?
+                    <CardBody>
+                        <CardTitle
+                            tag={RouterNavLink}
+                            to={`/galleries/${props.id}`}
+                        >
+                            {props.title}
+                        </CardTitle>
+                        <CardText>
+                            {props.user.displayName}
+                        </CardText>
                 </CardBody>
-                {props.user === this.props.user._id
+                    : null }
+                {props.user === props.user._id
                     ? <CardFooter className="d-flex justify-content-between">
                         <Button size="sm" color="danger" onClick={props.onDelete}>Delete</Button>
                     </CardFooter>

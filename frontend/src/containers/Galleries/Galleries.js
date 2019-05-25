@@ -20,7 +20,7 @@ class Galleries extends Component {
                     <GalleriesList
                         key={galleries._id}
                         id={galleries._id}
-                        name={galleries.title}
+                        title={galleries.title}
                         image={galleries.image}
                         user={this.props.user}
                         onDelete={() => this.props.deletePhoto(galleries._id)}

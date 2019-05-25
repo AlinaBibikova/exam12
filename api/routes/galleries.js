@@ -22,7 +22,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const galleries = await Gallery.find();
+        const galleries = await Gallery.find().populate('user');
         return res.send(galleries);
     } catch {
         return res.sendStatus(500);
