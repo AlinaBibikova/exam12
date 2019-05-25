@@ -7,7 +7,6 @@ const config = require('../config');
 const auth = require('../middleware/auth');
 const Gallery = require('../models/Gallery');
 
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, config.uploadPath);
@@ -44,9 +43,9 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', [auth, upload.single('image')], async (req, res) => {
+router.post('/', auth, upload.single('image'), async (req, res) => {
     const galleryData = req.body;
-    galleryData.user = req.user._id;
+    //galleryData.user = req.user._id;
 
     if (req.file) {
         galleryData.image = req.file.filename;
@@ -54,11 +53,10 @@ router.post('/', [auth, upload.single('image')], async (req, res) => {
 
     try {
         const gallery = new Gallery(galleryData);
-
         await gallery.save();
-        return res.send({message: 'Gallery added!', gallery: gallery});
-    } catch (e) {
-        return res.status(400).send(e);
+        return res.send({message: 'Gallery added!', gallery});
+    } catch (error) {
+        return res.status(400).send(error);
     }
 });
 
