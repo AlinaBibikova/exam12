@@ -58,6 +58,7 @@ export const fetchPhoto = photoId => {
 
 export const addPhoto = photoData => {
     return async dispatch => {
+
         dispatch(addDataRequest());
 
         try {
@@ -66,8 +67,8 @@ export const addPhoto = photoData => {
             dispatch(addDataSuccess());
             NotificationManager.success(response.data.message);
             dispatch(push('/'))
-        } catch (e) {
-            dispatch(addDataFailure(e.response.data));
+        } catch (error) {
+            dispatch(addDataFailure(error.response.data));
         }
     }
 };

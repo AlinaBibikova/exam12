@@ -11,7 +11,6 @@ class Galleries extends Component {
     }
 
     render() {
-        console.log(this.props.galleries);
         return (
             <Row>
                 {this.props.loading && <Loader/>}

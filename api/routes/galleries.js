@@ -45,7 +45,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', auth, upload.single('image'), async (req, res) => {
     const galleryData = req.body;
-    //galleryData.user = req.user._id;
+    galleryData.user = req.user._id;
 
     if (req.file) {
         galleryData.image = req.file.filename;

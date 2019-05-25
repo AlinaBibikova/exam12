@@ -5,6 +5,9 @@ import {NavLink as RouterNavLink} from "react-router-dom";
 import {apiURL} from "../../constants";
 
 const GalleriesList = props => {
+    const userDisplayName = props.userD && props.userD.displayName;
+    const userId = props.user && props.user._id;
+
     return (
         <Col xs="12" sm="6" md="4">
             <Card className="mb-3">
@@ -15,7 +18,7 @@ const GalleriesList = props => {
                     : null
                 }
 
-                {props.title && props.userD ?
+                {props.title && userDisplayName?
                     <CardBody>
                         <CardTitle
                             tag={RouterNavLink}
@@ -24,11 +27,11 @@ const GalleriesList = props => {
                             {props.title}
                         </CardTitle>
                         <CardText>
-                            By: {props.userD.displayName}
+                            By: {userDisplayName}
                         </CardText>
                 </CardBody>
                     : null }
-                {props.user === props.user._id
+                {userId === props.userD._id
                     ? <CardFooter className="d-flex justify-content-between">
                         <Button size="sm" color="danger" onClick={props.onDelete}>Delete</Button>
                     </CardFooter>
